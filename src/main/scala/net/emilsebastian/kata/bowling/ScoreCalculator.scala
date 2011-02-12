@@ -1,11 +1,10 @@
 package net.emilsebastian.kata.bowling
 
 /**
- * Utility class for calculating the score of a game of bowling.
+ * Utility for calculating the score of a game of bowling.
  *
  * @author emilsebastian
  */
-
 object ScoreCalculator {
 
   def calculate(frames: List[BowlingFrame]): Int = {
