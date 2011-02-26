@@ -30,6 +30,10 @@ class PascalsTriangleGeneratorSpec extends FlatSpec with ShouldMatchers {
     generator.generateNextRow(List(1, 3, 3, 1)) should equal(List(1, 4, 6, 4, 1))
   }
 
+  it should "generate a correct sixth row" in {
+    generator.generateNextRow(List(1, 4, 6, 4, 1)) should equal(List(1, 5, 10, 10, 5, 1))
+  }
+
   "Pascal's Triangle generator" should "generate a correct triangle with six levels" in {
     generator.generate(6) should equal(List(
       List(1),
