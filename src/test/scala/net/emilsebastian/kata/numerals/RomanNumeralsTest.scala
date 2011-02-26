@@ -1,26 +1,49 @@
 package net.emilsebastian.kata.numerals
 
-import org.scalatest.FlatSpec
+import org.scalatest.fixture.FixtureFlatSpec
 import org.scalatest.matchers.ShouldMatchers
 
-class RomanNumeralsTest extends FlatSpec with ShouldMatchers {
+/**
+ * Specifications for the various Roman Numerals Kata implementations.
+ */
+class RomanNumeralsTest extends FixtureFlatSpec with ShouldMatchers {
 
-  "Roman numerals" should "convert decimal numbers properly" in {
+  val expectations = Map(1 -> "I", 2 -> "II", 3 -> "III", 4 -> "IV", 5 -> "V",
+                         6 -> "VI", 7 -> "VII", 8 -> "VIII", 9 -> "IX", 10 -> "X",
+                         111 -> "CXI", 222 -> "CCXXII", 333 -> "CCCXXXIII", 444 -> "CDXLIV", 555 -> "DLV",
+                         666 -> "DCLXVI", 777 -> "DCCLXXVII", 888 -> "DCCCLXXXVIII", 999 -> "CMXCIX",
+                         1990 -> "MCMXC", 2008 -> "MMVIII", 3999 -> "MMMCMXCIX")
 
+  type FixtureParam = (Int, String)
+
+  def withFixture(test: OneArgTest) {
+    for ((number, numeral) <- expectations) {
+      test((number, numeral))
+    }
+  }
+
+  "Roman numerals" should "convert decimal numbers properly" in { fixture =>
+
+    val (number, numeral) = fixture
     val r = new RomanNumerals()
 
-    r.toRoman(1) should equal ("I")
-    r.toRoman(2) should equal ("II")
-    r.toRoman(3) should equal ("III")
-    r.toRoman(4) should equal ("IV")
-    r.toRoman(5) should equal ("V")
-    r.toRoman(6) should equal ("VI")
-    r.toRoman(7) should equal ("VII")
-    r.toRoman(8) should equal ("VIII")
-    r.toRoman(9) should equal ("IX")
-    r.toRoman(10) should equal ("X")
-    r.toRoman(2008) should equal ("MMVIII")
-    r.toRoman(1990) should equal ("MCMXC")
+    r.toRoman(number) should equal (numeral)
+  }
+
+  "Roman numerals (map based)" should "convert decimal numbers properly" in { fixture =>
+
+    val (number, numeral) = fixture
+    val r = new MapBasedRomanNumerals()
+
+    r.toRoman(number) should equal (numeral)
+  }
+
+  "Roman numerals (with folding)" should "convert decimal numbers properly" in { fixture =>
+
+    val (number, numeral) = fixture
+    val r = new MapBasedRomanNumeralsWithFolding()
+
+    r.toRoman(number) should equal (numeral)
   }
   
 }

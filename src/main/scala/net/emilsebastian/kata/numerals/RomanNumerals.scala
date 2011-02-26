@@ -35,7 +35,7 @@ class RomanNumerals {
     numerals.toString
   }
   
-  def isPowerOfTen(number: Int):Boolean = {
+  private def isPowerOfTen(number: Int) = {
     (StrictMath.log10(number) % 1) == 0
   }
   
